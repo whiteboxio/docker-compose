@@ -7,11 +7,15 @@ services:
       - RACK_ENV=production
     volumes:
       - /app/public
+  whiteboxio_1:
+    image: whitebox:latest
+    environment: MIX_ENV=production
   nginx_1:
     image: whiteboxio/nginx:alpine-0.1.0
     restart: always
     links:
       - xls2txt_1:xls2txt_1
+      - whiteboxio_1:whiteboxio_1
     ports:
       - 80:80
     volumes_from:
