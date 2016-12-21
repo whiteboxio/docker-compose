@@ -6,19 +6,23 @@ services:
     environment:
       - RACK_ENV=production
     volumes:
-      - /app/public
-  whiteboxio_1:
-    image: whitebox:latest
-    environment: MIX_ENV=production
+      - /usr/local/www/xls2txt/public
+      - /etc/nginx/conf.d
+  iraand_me_1:
+    image: 4pcbr/iraand.me:latest
+    volumes:
+      - /usr/local/www/iraand.me
+      - /etc/nginx/conf.d
   nginx_1:
     image: whiteboxio/nginx:alpine-0.1.0
     restart: always
     links:
       - xls2txt_1:xls2txt_1
-      - whiteboxio_1:whiteboxio_1
+      - iraand_me_1:iraand_me_1
     ports:
       - 80:80
     volumes_from:
       - xls2txt_1
+      - iraand_me_1
     volumes:
-      - /app/public
+      - /etc/nginx/conf.d
