@@ -7,12 +7,12 @@ services:
       - RACK_ENV=production
     volumes:
       - /usr/local/www/xls2txt/public
-      - /etc/nginx/conf.d
+      - /etc/nginx/conf.d/xls2txt.whitebox.io
   iraand_me_1:
     image: 4pcbr/iraand.me:latest
     volumes:
       - /usr/local/www/iraand.me
-      - /etc/nginx/conf.d
+      - /etc/nginx/conf.d/iraand.me
   nginx_1:
     image: whiteboxio/nginx:alpine-0.1.0
     restart: always
@@ -22,7 +22,7 @@ services:
     ports:
       - 80:80
     volumes_from:
-      - xls2txt_1
-      - iraand_me_1
+      - iraand_me_1:ro
+      - xls2txt_1:ro
     volumes:
       - /etc/nginx/conf.d
