@@ -13,6 +13,14 @@ services:
     volumes:
       - /usr/local/www/iraand.me
       - /etc/nginx/conf.d/iraand.me
+  whitebox_io_nginx_1:
+    image: whiteboxio/whitebox_io_nginx:latest
+    volumes:
+      - /etc/nginx/conf.d/whitebox.io
+  whitebox_io_1:
+    image: whitebox
+    environment:
+      - MIX_ENV=production
   nginx_1:
     image: whiteboxio/nginx:alpine-0.1.0
     restart: always
@@ -24,5 +32,6 @@ services:
     volumes_from:
       - iraand_me_1:ro
       - xls2txt_1:ro
+      - whitebox_io_nginx_1:ro
     volumes:
       - /etc/nginx/conf.d
