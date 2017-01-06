@@ -24,14 +24,22 @@ services:
   nginx_1:
     image: whiteboxio/nginx:alpine-0.1.0
     restart: always
-    links:
-      - xls2txt_1:xls2txt_1
-      - iraand_me_1:iraand_me_1
     ports:
       - 80:80
     volumes_from:
       - iraand_me_1:ro
       - xls2txt_1:ro
       - whitebox_io_nginx_1:ro
+      - i_whitebox_io_nginx_1:ro
     volumes:
       - /etc/nginx/conf.d
+  i_whitebox_io_nginx_1:
+    image: whiteboxio/i_whitebox_io_nginx:latest
+    volumes:
+      - /etc/nginx/conf.d/i.whitebox.io
+      - /usr/local/web/i.whitebox.io:/usr/local/www/i.whitebox.io/public
+  #i_whitebox_io_1:
+    #command: bundle exec thin start -p 7171
+    #image: whiteboxio/i_whitebox_io:alpine-0.1.0
+    #@environment:
+    #  - RACK_ENV=production
