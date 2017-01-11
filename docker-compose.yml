@@ -13,6 +13,12 @@ services:
     volumes:
       - /usr/local/www/iraand.me
       - /etc/nginx/conf.d/iraand.me
+  fryreadsonegin_com_1:
+    image: whiteboxio/fryreadsonegin_com:latest
+    volumes:
+      - /usr/local/www/fryreadsonegin.com/public
+      - /usr/local/web/fryreadsonegin.com/download:/usr/local/www/fryreadsonegin.com/download
+      - /etc/nginx/conf.d/fryreadsonegin.com
   whitebox_io_nginx_1:
     image: whiteboxio/whitebox_io_nginx:latest
     volumes:
@@ -31,6 +37,7 @@ services:
       - xls2txt_1:ro
       - whitebox_io_nginx_1:ro
       - i_whitebox_io_nginx_1:ro
+      - fryreadsonegin_com_1:ro
     volumes:
       - /etc/nginx/conf.d
   i_whitebox_io_nginx_1:
