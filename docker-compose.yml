@@ -38,6 +38,7 @@ services:
       - whitebox_io_nginx_1:ro
       - i_whitebox_io_nginx_1:ro
       - fryreadsonegin_com_1:ro
+      - hokku_1:ro
     volumes:
       - /etc/nginx/conf.d
   i_whitebox_io_nginx_1:
@@ -45,6 +46,11 @@ services:
     volumes:
       - /etc/nginx/conf.d/i.whitebox.io
       - /usr/local/web/i.whitebox.io:/usr/local/www/i.whitebox.io/public
+  hokku_1:
+    image: 4pcbr/hokku:latest
+    volumes:
+      - /usr/local/www/hokku/public
+      - /etc/nginx/conf.d/zzzz-hokku
   #i_whitebox_io_1:
     #command: bundle exec thin start -p 7171
     #image: whiteboxio/i_whitebox_io:alpine-0.1.0
